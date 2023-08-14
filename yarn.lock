@@ -2961,9 +2961,10 @@ jsbn@~0.1.0:
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
   integrity sha1-peZUwuWi3rXyAdls77yoDA7y9RM=
 
-jsdiff@components/jsdiff#~3.2.0:
+jsdiff@components/jsdiff#~3.4.0:
   version "0.0.0"
-  resolved "https://codeload.github.com/components/jsdiff/tar.gz/0abd2d3b90046f66e2d7d816a4d975cb1ad03b50"
+  uid "7e83f72e95b818cf26bb80f1c752b7eb7a79ce0d"
+  resolved "https://codeload.github.com/components/jsdiff/tar.gz/7e83f72e95b818cf26bb80f1c752b7eb7a79ce0d"
 
 json-buffer@3.0.1, json-buffer@~3.0.1:
   version "3.0.1"
@@ -5725,7 +5726,7 @@ wide-align@^1.1.5:
   dependencies:
     string-width "^1.0.2 || 2 || 3 || 4"
 
-word-wrap@^1.2.3, "word-wrap@npm:@aashutoshrathi/word-wrap@1.2.5", word-wrap@~1.2.3:
+word-wrap@^1.2.3, word-wrap@~1.2.3:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/@aashutoshrathi/word-wrap/-/word-wrap-1.2.5.tgz#383aeebd5c176c320d6364fb869669559bbdbac9"
   integrity sha512-plhoNEfSVdHMKXQyAxvH0Zyv3/4NL8r6pwgMQdmHR2vBUXn2t74PN2pBRppqKUa6RMT0yldyvOHG5Dbjwy2mBQ==
