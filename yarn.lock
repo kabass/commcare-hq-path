@@ -1358,9 +1358,10 @@ datatables-buttons@DataTables/Buttons#^1.5.6:
   version "0.0.0"
   resolved "https://codeload.github.com/DataTables/Buttons/tar.gz/5e51cec85d3b3ffc467c8d213592927a590a80ae"
 
-datatables-colreorder@DataTables/ColReorder#^1.5.1:
+datatables-colreorder@DataTables/ColReorder#^1.7.0:
   version "0.0.0"
-  resolved "https://codeload.github.com/DataTables/ColReorder/tar.gz/f0e558a1f38919fa95d82700aeea7ce3ca6fbfd5"
+  uid aa1425736781596e94141d8da5204c1332138fa1
+  resolved "https://codeload.github.com/DataTables/ColReorder/tar.gz/aa1425736781596e94141d8da5204c1332138fa1"
 
 datatables-fixedcolumns@DataTables/FixedColumns#3.2.0:
   version "0.0.0"
@@ -5725,7 +5726,7 @@ wide-align@^1.1.5:
   dependencies:
     string-width "^1.0.2 || 2 || 3 || 4"
 
-word-wrap@^1.2.3, "word-wrap@npm:@aashutoshrathi/word-wrap@1.2.5", word-wrap@~1.2.3:
+word-wrap@^1.2.3, word-wrap@~1.2.3:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/@aashutoshrathi/word-wrap/-/word-wrap-1.2.5.tgz#383aeebd5c176c320d6364fb869669559bbdbac9"
   integrity sha512-plhoNEfSVdHMKXQyAxvH0Zyv3/4NL8r6pwgMQdmHR2vBUXn2t74PN2pBRppqKUa6RMT0yldyvOHG5Dbjwy2mBQ==
