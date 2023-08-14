@@ -297,7 +297,7 @@ grpcio==1.54.2
     #   grpcio-status
 grpcio-status==1.54.2
     # via google-api-core
-gunicorn==20.0.4
+gunicorn==21.2.0
     # via -r base-requirements.in
 hiredis==2.0.0
     # via -r base-requirements.in
@@ -402,6 +402,7 @@ packaging==23.0
     #   build
     #   ddtrace
     #   geopandas
+    #   gunicorn
 pandas==2.0.1
     # via geopandas
 pep517==0.10.0
@@ -710,7 +711,6 @@ setuptools==67.3.2
     # via
     #   django-websocket-redis
     #   gevent
-    #   gunicorn
     #   opentelemetry-api
     #   pip-tools
     #   zope-event
