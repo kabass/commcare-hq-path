@@ -1,0 +1,15 @@
+{% extends 'hqwebapp/bootstrap3/base_section.html' %}
+{% load hq_shared_tags %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% requirejs_main 'users/js/invite_web_user' %}
+
+{% block page_content %}
+  {% registerurl "check_sso_trust" domain %}
+
+  <div id="invite-web-user-form"
+       class="ko-template">
+    {% crispy registration_form %}
+  </div>
+{% endblock %}

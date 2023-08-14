@@ -1,0 +1,84 @@
+{% load i18n %}
+<!--ko if: state === $root.states.SUCCESS && result-->
+<div>
+  <!--ko if: result.match_count-->
+  <p>
+    {% blocktrans with match_count='result.match_count' %}
+      <strong data-bind="text: {{ match_count }}"></strong> rows were matched and
+      updated.
+    {% endblocktrans %}
+  </p>
+  <!--/ko-->
+
+  <!--ko if: result.created_count > 0-->
+  <p>
+    {% blocktrans with created_count='result.created_count' %}
+      <strong data-bind="text: {{ created_count }}"></strong> rows did
+      not match any existing cases and had new cases created
+      for them. If case_id's were used, these were ignored.
+    {% endblocktrans %}
+  </p>
+  <!--/ko-->
+
+  <!--ko if: result.match_count === 0 && result.created_count === 0-->
+  <p>
+    {% trans "No cases were created or updated during this import." %}
+  </p>
+  <!--/ko-->
+</div>
+<!--ko if: !$root._.isEmpty(result.errors)-->
+<div class="alert alert-warning">
+  <ul class="list-unstyled">
+    <!--ko foreach: result.errors-->
+    <!--ko if: rows-->
+    <li>
+      <!--ko if: column-->
+      <p><strong>
+        <!-- ko if: rows.length == 1-->
+        {% blocktrans %}
+          <span data-bind="text: rows.length"></span> row had an invalid
+          "<span data-bind="text: column"></span>" cell and was not saved
+        {% endblocktrans %}
+        <!--/ko-->
+        <!-- ko if: rows.length > 1-->
+        {% blocktrans %}
+          <span data-bind="text: rows.length"></span> rows had invalid
+          "<span data-bind="text: column"></span>" cells and were not saved
+        {% endblocktrans %}
+        <!--/ko-->
+      </strong></p>
+      <!--/ko-->
+      <!--ko if: !column -->
+      <p><strong data-bind="text: title"></strong></p>
+      <!--/ko-->
+      <p data-bind="text: description">
+      </p>
+      <p data-bind="visible: sample, text: sample">
+      </p>
+      <p data-bind="visible: rows.length">
+        <span>{% trans "Row(s):" %}</span>
+        <span data-bind="text: rows.join(', ')"></span>
+      </p>
+    </li>
+    <!--/ko-->
+    <!--/ko-->
+  </ul>
+</div>
+<!--/ko-->
+<!--/ko-->
+<!--ko if: state == $root.states.SUCCESS && !result-->
+<div class="alert alert-warning">
+  <p>{% trans "Unable to retrieve details" %}</p>
+</div>
+<!--/ko-->
+<!--ko if: state === $root.states.FAILED && result && !$root._.isEmpty(result.errors)-->
+<div class="alert alert-warning">
+  <ul class="list-unstyled">
+    <!--ko foreach: result.errors-->
+    <li>
+      <p data-bind="text: description">
+    </li>
+    <!--/ko-->
+  </ul>
+</div>
+<!--/ko-->

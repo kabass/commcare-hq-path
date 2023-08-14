@@ -1,0 +1,45 @@
+{% extends "hqwebapp/bootstrap3/base_section.html" %}
+{% load i18n %}
+
+{% block page_content %}
+  <p>{% trans "See a user's projects by entering their email address below." %}</p>
+  <form class="form-inline" method="GET" action="">
+    <input name="q" type="text" class="form-control" placeholder="you@example.com"/>
+    <input class="btn btn-primary" type="submit"/>
+  </form>
+  {% if web_user %}
+    <hr>
+    <h1>{% blocktrans with user_name=web_user.human_friendly_name %}{{ user_name }}'s Information{% endblocktrans %}</h1>
+    {% if not web_user.is_active %}
+      <div class="alert alert-warning" role="alert">{% trans "This account is disabled." %}</div>
+    {% endif %}
+    <dl>
+      <div><b>{% trans "ID" %}:</b>
+        {{ web_user.get_id }}
+        <small><a href="{% url 'raw_doc' %}?id={{ web_user.get_id }}">{% trans "couch doc" %}</a></small> |
+        <small><a href="{% url 'doc_in_es' %}?id={{ web_user.get_id }}">{% trans "elasticsearch lookup" %}</a></small>
+      </div>
+      <div><b>{% trans "Is Superuser" %}:</b> {{ web_user.is_superuser }}</div>
+    </dl>
+    <div class="btn-toolbar">
+      <a class="btn btn-default" href="{{ audit_report_url }}?username={{ web_user.username|urlencode }}">View User Audit Report</a>
+      <a class="btn btn-default" href="{% url 'disable_user' %}?username={{ web_user.username|urlencode }}">Disable/Enable User Account</a>
+      <a class="btn btn-default {% if not has_two_factor %}disabled{% endif %}" href="{% url 'disable_two_factor' %}?q={{ web_user.username|urlencode }}">Temporarily Disable Two-Factor Authentication</a>
+    </div>
+    <h3>{% trans "Domains" %}</h3>
+    <div class="col-md-6">
+      <table class="table table-striped table-bordered">
+        <tr>
+          <th class="col-sm-8">{% trans "Domain" %}</th>
+          <th class="col-sm-4">{% trans "Role" %}</th>
+        </tr>
+        {% for membership in web_user.domain_memberships %}
+          <tr>
+            <td><a href="{% url 'dashboard_default' membership.domain %}">{{ membership.domain  }}</a></td>
+            <td>{{ membership.role.name|default:'Unknown' }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  {% endif %}
+{% endblock %}

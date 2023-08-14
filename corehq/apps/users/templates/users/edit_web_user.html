@@ -1,0 +1,116 @@
+{% extends 'hqwebapp/bootstrap3/base_section.html' %}
+
+{% load crispy_forms_tags %}
+{% load hq_shared_tags %}
+{% load i18n %}
+
+{% requirejs_main "locations/js/widgets" %}
+
+{% block page_content %}
+  {% if has_untrusted_identity_provider %}
+    <div class="alert alert-setting">
+      <p class="lead">
+        <i class="fa fa-lock"></i>
+        {% blocktrans with couch_user.human_friendly_name as friendly_name %}
+          The SSO Identity Provider for {{ friendly_name }}, "{{ idp_name }}",
+          is not trusted by this project space.
+        {% endblocktrans %}
+      </p>
+      <p>
+        {% blocktrans %}
+          Click Trust Provider below to restore access for this user.
+          <a href="#">Learn more</a> about SSO on CommCare HQ.
+        {% endblocktrans %}
+      </p>
+      <form class="form form" name="trust_identity_provider" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="form_type" value="trust-identity-provider" />
+        <p style="margin-top: 10px;">
+          <button type="submit"
+                  class="btn btn-confirm">
+            {% trans "Trust Identity Provider" %}
+          </button>
+        </p>
+      </form>
+    </div>
+  {% endif %}
+  <div class="form form-horizontal">
+    <fieldset>
+      <legend>{% blocktrans with couch_user.human_friendly_name as friendly_name %}Information for {{ friendly_name }}{% endblocktrans %}</legend>
+      <dl class="dl-horizontal hq-dl-userinfo">
+        <dt>{% trans 'Username' %}</dt>
+        <dd>{{ couch_user.html_username }}</dd>
+        {% for field in form_uneditable.visible_fields %}
+          {% if couch_user|getattr:field.name %}
+            <dt>{{ field.label }}</dt>
+            <dd class="hq-dd-userinfo">{{ couch_user|getattr:field.name }}</dd>
+          {% endif %}
+        {% endfor %}
+        {% if phonenumbers %}
+          <dt>{% trans 'Phone Numbers' %}</dt>
+          <dd>
+            <ul>
+              {% for phonenumber in phonenumbers %}
+                <li>+{{ phonenumber.number }}</li>
+              {% endfor %}
+            </ul>
+          </dd>
+        {% endif %}
+      </dl>
+    </fieldset>
+  </div>
+  {% if can_edit_role and not request.is_view_only %}
+    <form class="form form-horizontal" name="user_role" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="form_type" value="update-user" />
+      <fieldset>
+        <legend>{% blocktrans with couch_user.human_friendly_name as friendly_name %}Change {{ friendly_name }}'s Role{% endblocktrans %}</legend>
+        {% crispy form_user_update %}
+
+        <div class="form-actions">
+          <div class="col-sm-offset-3 col-md-offset-2 col-sm-9 col-md-8 col-lg-6">
+            <button type="submit" class="btn btn-primary">{% trans 'Update Role' %}</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  {% endif %}
+
+  {% if update_form %}
+    <hr />
+    <form id="commtrack_form" class="form form-horizontal" name="" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="form_type" value="commtrack" />
+      <fieldset>
+        <legend>{% trans 'Location Settings' %}</legend>
+        {% crispy update_form %}
+      </fieldset>
+      {% if not request.is_view_only %}
+        <div class="form-actions">
+          <div class="col-sm-offset-3 col-md-offset-2 col-sm-9 col-md-8 col-lg-6">
+            <button type="submit" class="btn btn-primary">{% trans 'Update Location Settings' %}</button>
+          </div>
+        </div>
+      {% endif %}
+    </form>
+  {% endif %}
+
+  {% if tableau_form %}
+    <hr />
+    <form id="tableau_form" class="form form-horizontal" name="" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="form_type" value="tableau" />
+      <fieldset>
+        <legend>{% trans 'Tableau Configuration' %}</legend>
+        {% crispy tableau_form %}
+      </fieldset>
+      {% if not request.is_view_only %}
+        <div class="form-actions">
+          <div class="col-sm-offset-3 col-md-offset-2 col-sm-9 col-md-8 col-lg-6">
+            <button type="submit" class="btn btn-primary">{% trans 'Update Tableau Configuration' %}</button>
+          </div>
+        </div>
+      {% endif %}
+    </form>
+  {% endif %}
+{% endblock %}
