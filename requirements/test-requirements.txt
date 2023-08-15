@@ -344,7 +344,7 @@ jsonschema==4.17.3
     #   ddtrace
 jwcrypto==1.4
     # via django-oauth-toolkit
-kafka-python==1.4.7
+kafka-python==2.0.2
     # via -r base-requirements.in
 kombu==5.2.4
     # via celery
