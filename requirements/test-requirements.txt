@@ -221,7 +221,7 @@ exceptiongroup==1.1.1
     # via cattrs
 fakecouch==0.0.15
     # via -r test-requirements.in
-faker==18.6.1
+faker==19.6.1
     # via -r test-requirements.in
 fiona==1.9.3
     # via geopandas
