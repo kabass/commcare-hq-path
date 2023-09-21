@@ -329,6 +329,7 @@ greenlet==1.1.2
     #   -r base-requirements.in
     #   django-websocket-redis
     #   gevent
+    #   sqlalchemy
 grpcio==1.54.2
     # via
     #   google-api-core
@@ -747,7 +748,7 @@ sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
 sqlagg==0.17.2
     # via -r base-requirements.in
-sqlalchemy==1.3.19
+sqlalchemy==2.0.21
     # via
     #   -r base-requirements.in
     #   alembic
@@ -787,7 +788,7 @@ turn-python==0.0.1
     # via -r base-requirements.in
 twilio==7.12.0
     # via -r base-requirements.in
-typing-extensions==4.1.1
+typing-extensions==4.8.0
     # via
     #   bytecode
     #   cattrs
@@ -795,6 +796,7 @@ typing-extensions==4.1.1
     #   django-countries
     #   oic
     #   qrcode
+    #   sqlalchemy
 tzdata==2023.3
     # via pandas
 ua-parser==0.10.0
